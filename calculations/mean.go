@@ -4,8 +4,7 @@ func Mean(num []float64) float64 {
 	var sum float64
 	size := float64(len(num))
 	for _, v := range num {
-		sum = float64(v + v)
+		sum += v
 	}
-	mean := sum / size
-	return mean
+	return sum / size
 }
