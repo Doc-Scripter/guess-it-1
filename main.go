@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"guess/calculations"
+	G "guess/calculations"
 )
 
 func main() {
@@ -25,7 +25,7 @@ func main() {
 		line := strings.TrimSpace(scanner.Text())
 		words = strings.Split(line, " ")
 		if len(words) > 1 {
-			fmt.Println("wrong format")
+			fmt.Println("the format to be used in data.txt is: \n<number>\n<number>\n ....")
 			return
 		}
 		for _, v := range words {
@@ -33,6 +33,7 @@ func main() {
 				num, err := strconv.ParseFloat(line, 64)
 				if err != nil {
 					fmt.Println("The data contains non-integer", err)
+					return
 				}
 				numbers = append(numbers, num)
 			}
@@ -52,8 +53,8 @@ func main() {
 	for i := 1; i < len(numbers); i++ {
 		currentNum := numbers[i-1]
 		nextNum := numbers[i]
-		rangeStart, rangeEnd := calculations.GuessRange(numbers, currentNum, nextNum)
-		fmt.Printf("%d--> the standard input\n", int(currentNum))
-		fmt.Printf("%d %d--> the range for the next input, in this case for the number %d\n", rangeStart, rangeEnd,int(nextNum))
+		rangeStart, rangeEnd := G.GuessRange(numbers[i:], currentNum, nextNum)
+		fmt.Printf("%d --> the standard input\n", int(currentNum))
+		fmt.Printf("%d %d   --> the range for the next input, in this case for the number %d\n", rangeStart, rangeEnd, int(nextNum))
 	}
 }
