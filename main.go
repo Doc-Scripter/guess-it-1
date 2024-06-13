@@ -54,6 +54,6 @@ func main() {
 		nextNum := numbers[i]
 		rangeStart, rangeEnd := calculations.GuessRange(numbers, currentNum, nextNum)
 		fmt.Printf("%d--> the standard input\n", int(currentNum))
-		fmt.Printf("%d %d--> the range for the next input, in this case for the number\n", rangeStart, rangeEnd)
+		fmt.Printf("%d %d--> the range for the next input, in this case for the number %d\n", rangeStart, rangeEnd,int(nextNum))
 	}
 }
