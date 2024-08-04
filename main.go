@@ -14,7 +14,7 @@ import (
 func main() {
 	reader := bufio.NewReader(os.Stdin)
 	var numbers []float64
-	isSkewed:=false
+	isSkewed := false
 	for {
 
 		input, err := reader.ReadString('\n')
@@ -31,15 +31,20 @@ func main() {
 		}
 
 		numbers = append(numbers, num)
-
-		// Calculate skewness and adjust if needed
-		skewness := calculations.Skewness(numbers)
-		if math.Abs(skewness) >= 0.5 {
-			isSkewed = true
+		if len(numbers) > 4 {
+			numbers = numbers[(len(numbers) - 4):]
 		}
+		if len(numbers) > 1 {
 
-		// Call GuessRange to get the predicted range
-		rangeStart, rangeEnd := calculations.GuessRange(numbers, num, isSkewed)
-		fmt.Printf("%d - %d\n", rangeStart, rangeEnd)
+			// Calculate skewness and adjust if needed
+			skewness := calculations.Skewness(numbers)
+			if math.Abs(skewness) >= 0.5 {
+				isSkewed = true
+			}
+
+			rangeStart, rangeEnd := calculations.GuessRange(numbers, num, isSkewed)
+			fmt.Printf("%d %d\n", rangeStart, rangeEnd)
+
+		}
 	}
 }
