@@ -2,6 +2,9 @@ package calculations
 
 import "math"
 
+//use formula for normal distribution
+// Adjust for skewed distribution
+// Handle case if the skewness condition changes 
 func GuessRange(num []float64, currentNum float64, isSkewed bool) (int, int) {
 	mean := Mean(num)
 	standardDev := StandardDev(num)
@@ -10,15 +13,13 @@ func GuessRange(num []float64, currentNum float64, isSkewed bool) (int, int) {
 	var rangeStart, rangeEnd float64
 
 	if isSkewed {
-		// Adjust for skewed distribution
-		rangeStart = mean - 2*standardDev // Example adjustment
-		rangeEnd = mean + 2*standardDev   // Example adjustment
+		rangeStart = mean - 2*standardDev 
+		rangeEnd = mean + 2*standardDev   
 	} else {
-		if math.Abs(skewness) < 0.5 { // Assuming normal distribution
+		if math.Abs(skewness) < 0.5 { 
 			rangeStart = math.Max(currentNum-standardDev, mean-standardDev)
 			rangeEnd = math.Min(currentNum+standardDev, mean+standardDev)
 		} else {
-			// Handle case if the skewness condition changes (normally shouldn't happen in this design)
 			rangeStart = mean - 2*standardDev
 			rangeEnd = mean + 2*standardDev
 		}
