@@ -4,6 +4,7 @@ import (
 	"math"
 )
 
+//formula for getting standard deviation
 func StandardDev(num []float64) float64 {
 	mean := Mean(num)
 	var result []float64

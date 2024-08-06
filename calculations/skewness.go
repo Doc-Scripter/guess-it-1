@@ -2,6 +2,7 @@ package calculations
 
 import "math"
 
+//formula for calculating skewness of a set of numbers
 func Skewness(data []float64) float64 {
 	mean := Mean(data)
 	stdDev := StandardDev(data)
